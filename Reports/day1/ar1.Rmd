@@ -1,0 +1,38 @@
+---
+title: "Activité Rapide 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pen & paper
+
+Suppose you have some ratings (on a 1-5 scale, 5 being the best) of a product $\{1, 1, 3, 3, 3, 3, 5, 5 \}$.
+
+a) Represent those results in a contingency table.
+
+b) Draw a barplot using the previous table.
+
+c) Find the mean of the ratings.
+
+d) Find the median of the ratings.
+
+e) Find the mode of the ratings.
+
+
+## With R
+
+a) 
+
+```{r contingency table}
+
+```
+
+b)
+
+```{r}
+
+```
+

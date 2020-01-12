@@ -1,0 +1,131 @@
+---
+title: "Retour Blended 1"
+output: 
+  html_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load libraries, warning=FALSE, message=FALSE}
+# install if needed
+if(!require("tidyverse")){install.packages("tidyverse")}
+if(!require("rmarkdown")){install.packages("rmarkdown")}
+if(!require(knitr)){install.packages(knitr)}
+
+# load packages with no message or warning from chunk option
+# alternative to suppressPackageStartupMessages(library("tidyverse"))
+library("tidyverse")
+library(rmarkdown)
+library(knitr)
+```
+
+## Purpose
+
+Prepare the Quizz 1 with a practical example.
+
+The `iris` dataset example should illustrate :
+
+  * part of the work of a data scientist
+  
+  * some tools used
+    + viz
+    + ML (lm, kmeans, cart, nnet, ...)
+    
+  * some ML methods used 
+    + train - test
+    + CV
+    
+  * some methodology in the study :
+    + descriptive analysis
+    + predictive analysis
+    + prescriptive analysis
+
+
+## Context 
+
+[extract from the help of the dataset `iris` description]
+
+"This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica."
+
+
+```{r data extract}
+iris %>% head() %>%  knitr::kable()
+```
+
+
+```{r data glimpse}
+iris %>% dplyr::glimpse()
+```
+
+## Problem formulation
+
+Given measurment of petal and sepal's flowers, predict in which species of iris a flower is. This type of problem is called supervised learning problem, this is moreover a classification task. 
+
+## Vizualisations
+
+Using the help of the function : `?the_fun`, plot different 
+
+```{r using base plot}
+# plot
+```
+
+
+```{r with ggplot2}
+# ggplot
+```
+
+### Naïve model
+
+Using the plots propose a determination criteria for the species of the iris. It will we used later on to decide if the trained model are performing good enough.
+
+
+## Machine learning - statistical learning
+
+Method of evaluation used : train - test split
+
+```{r split sample}
+train_index <- sample(x = 1:50, size = 35) + c(0, 49, 99) # I create a vector of train index for all species at index 1:50 ; 51:100 ; 101:150
+train <- iris[train_index , ] # to select a set of rows
+```
+
+### Training 
+
+Linear model
+
+```{r lm mod}
+# stats::lm
+```
+
+Classification tree
+
+```{r rcart}
+# rpart::rpart()
+```
+
+
+Neural network
+
+```{r nnet}
+# nnet::nnet
+```
+
+
+### Evaluation of models
+
+```{r eval}
+
+```
+
+
+### Final prescription (on the test set)
+
+In conclusion the rule used to determine iris species :
+
+
+## Conclusions - Take home message
+  
+  
+  
