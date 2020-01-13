@@ -116,6 +116,8 @@ sd(scores$Score)
 
 var(scores$Score)
 
+sqrt( var(scores$Score) )
+
 # boxplot((scores$Score))
 ```
 
@@ -137,6 +139,46 @@ dframe <- data.frame(
         men = c(2, 2, 4, 4, 8, 12, 13, 11, 10, 9, 5)
 )
 dframe
+```
+
+```{r}
+plot(x = dframe$score, y = dframe$women, col = "blue")
+points(x = dframe$score, y = dframe$men, col = "red")
+```
+
+
+```{r}
+ggplot(dframe, aes(x = score, y = women, colour = "red")) +
+        geom_point() +
+        geom_point( aes(x = score, y = men, colour = "blue"))+
+        xlab("Women and men scores") +
+        ylab("Frequency")
+```
+
+```{r}
+ggplot(dframe, aes(x = score, y = women, fill = "red")) +
+        geom_col(alpha = .5) +
+        geom_col(aes(x = score, y = men, fill = "blue"), alpha = .5)+
+        xlab("Women and men scores") +
+        ylab("Frequency")
+```
+
+Conclusion : From the barplot it seems men are more likely to think that mechanical failures are a source of accidents than women.
+
+
+```{r}
+# dframe_longer <- pivot_longer(dframe, cols = c("men", "women"))
+# 
+# ggplot(dframe_longer, aes(x = name, y = value, colour = "red")) +
+# #         geom_boxplot() 
+# 
+# # ggplot(dframe_longer, aes(x = name, y = value, colour = "red")) +
+# #         geom_boxplot() 
+# 
+# 
+#         geom_point( aes(x = score, y = men, colour = "blue"))+
+#         xlab("Women and men scores") +
+#         ylab("Frequency")
 ```
 
 
