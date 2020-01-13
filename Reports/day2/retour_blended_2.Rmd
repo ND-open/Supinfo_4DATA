@@ -1,0 +1,61 @@
+---
+title: "Retour Blended 2"
+date: "13/01/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### 1) Basics
+
+Given a serie $X = \{1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5\}$ (three 1, nine 5), compute __by hand__ the following statistics :
+
+  * mean
+  * median
+  * variance
+  * standard deviation
+  * mode
+  * quartiles (1, 2, 3, 4)
+  * min
+  * max
+
+__Use R__ to check your results :
+
+```{r stats}
+x <- rep(c(1,5), c(3,9))
+```
+
+
+### 2) Find one serie for every following conditions :
+
+  * mean(x) = 2
+  * median(x) = 3
+  * mode(x) = 5
+  * var(x) = 1
+
+
+### 3) Find one serie for every following conditions :
+
+  * mean(x) > median(x)
+  * mode(x) > mean(x)
+  * median(x) > mode(x)
+  
+  
+### 4) Normalisation - Z score
+
+Normalise the following serie (so that the mean is null and the variance is 1) :
+
+  * $Y = \{1, 3, 5\}$
+
+  * the one bellow using R :
+  
+```{r Z score}
+set.seed(123)
+x2 <- sample(1:10, 10, replace = TRUE)
+x2
+```
+
+

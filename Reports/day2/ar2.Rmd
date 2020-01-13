@@ -1,0 +1,53 @@
+---
+title: "Activité Rapide 2"
+date: "13/01/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Quantitative variable analysis [Pen & paper]
+
+Suppose you have some ratings (on a 1-10 scale, 10 being the best) of a product $\{1, 1, 5, 5, 5, 5, 9, 9\}$.
+
+a) Represent those results in a contingency table.
+b) Draw a barplot using the previous table.
+c) Find the mean of the ratings.
+d) Find the median of the ratings.
+e) Find the mode of the ratings.
+
+
+### Qualitative variable analysis
+
+Suppose you have some products $\{$prodA, prodA, prodB, prodB, prodB, prodB, prodC, prodC$\}$.
+
+a) Represent those results in a contingency table.
+b) Draw a barplot using the previous table.
+c) What is the mean of number of sold items  ?
+c) What is the median of number of sold items ?
+c) What is the mode of number of sold items ?
+
+### With R for the qualitative data
+
+a) Contingency table
+
+Concatenate et structure de x :
+
+```{r contingency table}
+
+```
+
+b) ggplot
+
+```{r ggplot}
+
+```
+
+c) statistics
+
+```{r stats}
+
+```
+
