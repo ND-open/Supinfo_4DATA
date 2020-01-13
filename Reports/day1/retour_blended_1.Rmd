@@ -160,7 +160,6 @@ Naive model evaluation :
 naive_pred <- ifelse(x_test$Petal.Length< 2 & x_test$Petal.Width, "setosa", ifelse( x_test$Petal.Length >3 & x_test$Petal.Length < 4.5 & x_test$Petal.Length > 1 & x_test$Petal.Length < 2, "versicolor", ifelse(x_test$Petal.Length > 5 & x_test$Petal.Width > 1.45, "virginica", "NA")))
 
 table(naive_pred, y_test)
-
 ```
 
 
