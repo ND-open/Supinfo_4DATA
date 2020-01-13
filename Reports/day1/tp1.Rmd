@@ -33,16 +33,46 @@ scores
 # scores
 ```
 
+1) 
 
+Les instructions de bases :
+
+  * table --> occurence
+  * prop.table --> pour convertir une table en proportions
+  
+  * plot
+  
+  * summary
+  * mean, median, quartile, quantlile, min, max, sd, var
+
+```{r stats}
+str(scores)
+
+summary(scores)
+mean(scores$Score)
+median(scores$Score)
+```
+
+1) Distribution
 
 ```{r}
-scores$I
+table(scores$Score)
+prop.table( table(scores$Score) ) * 100
+```
+
+```{r distribution plot}
+plot( table(scores$Score) )
+plot( prop.table( table(scores$Score) ) )
 ```
 
 
-## Exercice 3 
-
 ```{r}
-
+library(dplyr)
+scores %>%
+        ggplot(aes(x = Score)) +
+        geom_histogram(bins = 30)
 ```
+
+
+
 
