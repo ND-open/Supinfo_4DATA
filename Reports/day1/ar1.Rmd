@@ -26,13 +26,48 @@ e) Find the mode of the ratings.
 
 a) 
 
-```{r contingency table}
+Concatenate et structure de x :
 
+```{r contingency table}
+x <- c(1, 1, 3, 3, 3, 3, 5, 5)
+x
+str(x) # structure
+
+table(x)
 ```
 
-b)
+b) Baplot
 
-```{r}
+Base plot
 
+```{r viz base plot}
+x_table <- table(x)
+plot(x_table)
+```
+
+```{r ggplot}
+library(dplyr)
+library(ggplot2)
+
+xdf <- data.frame(x)
+# xdf %>%
+#         group_by(x) %>% 
+#         summarise(nb = n()) %>% 
+#         ggplot(data = ., aes(x = x, y = nb)) +
+#         geom_col() +
+#         xlab("Rates") + ylab("Frequency") +
+#         ggtitle("Frequency of the rates") +
+#         theme_light()
+
+ggplot(xdf, aes(x = x)) + 
+        geom_bar() +
+        xlab("Rates") + ylab("Frequency") +
+        ggtitle("Frequency of the rates") +
+        theme_light()
+```
+
+```{r stats}
+mean(x)
+median(x)
 ```
 
