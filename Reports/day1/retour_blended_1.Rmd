@@ -121,7 +121,21 @@ iris %>%
 
 ### Naïve model
 
+```{r}
+iris %>% 
+  ggplot(aes(x = Petal.Length, y = Petal.Width, colour = Species)) +
+  geom_point() +
+  theme_light()
+```
+
+
 Using the plots propose a determination criteria for the species of the iris. It will we used later on to decide if the trained model are performing good enough.
+
+Hypothesis : 
+
+* if length in [0,2] and width in [0, 0.5] then species is "setosa"
+* if length in [3, 4.5] and width in [1, 2] then  "versicolor"
+* if length in [5, 7] and width in [1.45, 3.5] then  virginica
 
 
 ## Machine learning - statistical learning
@@ -129,9 +143,26 @@ Using the plots propose a determination criteria for the species of the iris. It
 Method of evaluation used : train - test split
 
 ```{r split sample}
-train_index <- sample(x = 1:50, size = 35) + c(0, 49, 99) # I create a vector of train index for all species at index 1:50 ; 51:100 ; 101:150
+set.seed(123)
+train_index <- sample(x = 1:150, size = 110) # I create a vector of train index for all species at index 1:50 ; 51:100 ; 101:150
 train <- iris[train_index , ] # to select a set of rows
+# View(iris)
+table(train$Species)
+
+x_test <- iris[-train_index , -5]
+y_test <- iris[-train_index , 5]
+table(y_test)
 ```
+
+Naive model evaluation :
+
+```{r naive eval}
+naive_pred <- ifelse(x_test$Petal.Length< 2 & x_test$Petal.Width, "setosa", ifelse( x_test$Petal.Length >3 & x_test$Petal.Length < 4.5 & x_test$Petal.Length > 1 & x_test$Petal.Length < 2, "versicolor", ifelse(x_test$Petal.Length > 5 & x_test$Petal.Width > 1.45, "virginica", "NA")))
+
+table(naive_pred, y_test)
+
+```
+
 
 ### Training 
 
@@ -145,6 +176,16 @@ Classification tree
 
 ```{r rcart}
 # rpart::rpart()
+# rpart()
+fit <- rpart::rpart(Species ~ Petal.Length, data = train)
+fit
+par()$mar # 5.1 4.1 2.1 2.1
+par(mar = c(0, 4.1, 2.1, 0.1) )
+plot(fit)
+text(fit, use.n = TRUE)
+
+pred <- predict(object = fit, newdata = x_test, type = "class")
+table(pred, y_test)
 ```
 
 
