@@ -69,13 +69,55 @@ Given measurment of petal and sepal's flowers, predict in which species of iris 
 Using the help of the function : `?the_fun`, plot different 
 
 ```{r using base plot}
-# plot
+# ?plot()
+plot(iris[,-5], col = iris$Species)
 ```
 
 
-```{r with ggplot2}
+```{r with ggplot2 scatterplot}
 # ggplot
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point() +
+  theme_light()
 ```
+
+```{r histogram}
+iris %>% 
+  ggplot(aes(x = Sepal.Length, fill = Species)) +
+  geom_histogram(alpha = .5) +
+  theme_light()
+
+iris %>% 
+  ggplot(aes(x = Sepal.Width, fill = Species)) +
+  geom_histogram(alpha = .5) +
+  theme_light()
+```
+
+```{r density}
+iris %>% 
+  ggplot(aes(x = Sepal.Length, fill = Species)) +
+  geom_density(alpha = .5) +
+  theme_light()
+
+iris %>% 
+  ggplot(aes(x = Sepal.Width, fill = Species)) +
+  geom_density(alpha = .5) +
+  theme_light()
+```
+
+```{r boxplot}
+iris %>% 
+  ggplot(aes(x =Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  theme_light()
+
+iris %>% 
+  ggplot(aes(x= Species, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  theme_light()
+```
+
 
 ### Naïve model
 
