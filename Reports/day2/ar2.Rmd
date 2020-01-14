@@ -36,18 +36,22 @@ a) Contingency table
 Concatenate et structure de x :
 
 ```{r contingency table}
-
+x <- c(1, 1, 5, 5, 5, 5, 9, 9)
+table(x)
 ```
 
 b) ggplot
 
 ```{r ggplot}
-
+library(ggplot2)
+ggplot(data.frame(x = factor(x)), aes(x = x)) +
+        geom_bar()
 ```
 
 c) statistics
 
 ```{r stats}
-
+mean(x)
+median(x)
 ```
 

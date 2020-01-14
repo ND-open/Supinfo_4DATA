@@ -26,6 +26,17 @@ __Use R__ to check your results :
 
 ```{r stats}
 x <- rep(c(1,5), c(3,9))
+mean(x)
+median(x)
+var(x)
+# sd
+sd(x) ; # sqrt( var(x) )
+quantile(x, probs = c(0.25, 0.5, 0.75))
+min(x)
+max(x)
+
+quantile(c(1, 2, 3, 3), probs = c(0.25, 0.5, 0.75))
+median(c(1,1,3))
 ```
 
 
@@ -58,4 +69,14 @@ x2 <- sample(1:10, 10, replace = TRUE)
 x2
 ```
 
+
+### 5) "Bell curve" and distance from the mean
+
+Generate a sample of 100 real numbers obtained from a normal distribution. Find out the percentage of points within 1, 2 and 3 standard deviation of the mean.
+
+```{r standard deviation control - sigma control}
+set.seed(456)
+s <- rnorm(n = 100)
+s
+```
 
