@@ -29,11 +29,36 @@ The `iris` dataset.
 Perform dimensionnality reduction (with a PCA) on the `iris_num` dataset and plot the 2 first dimensions of projection with the labels.
 
 ```{r PCA}
-iris_num <- iris[,-5]
+# ?iris
+
+iris_num <- iris[ , -5]
 labels <- iris[,5]
 iris_num
 labels
+
+?prcomp
 ```
+
+
+```{r prcomp}
+pca_iris <- prcomp(iris_num)
+str( pca_iris )
+
+pca_iris
+cumsum(pca_iris$sdev / sum(pca_iris$sdev) )
+pca_iris$rotation
+# pca_iris$x
+
+plot(pca_iris$x, col = labels$Species)
+```
+
+
+```{r ggplot}
+library(ggplot2)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) + geom_point()
+
+```
+
 
 ### 2) Clustering
 
@@ -41,6 +66,8 @@ Perform a cluster analysis (with a kmeans) on the `iris_num` dataset and plot th
 
 ```{r clustering}
 iris_num
+
+?kmeans
 ```
 
 
