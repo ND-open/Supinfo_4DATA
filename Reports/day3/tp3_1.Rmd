@@ -29,21 +29,62 @@ nonrelational (NoSQL) data source.
 2.  Double-click RStudio on the desktop. In RStudio, cerate and open the file  Exo1. Add
 commands to the file according to the instructions that follow in this exercise, and
 execute each command as you move through the steps.
-3.  At the console prompt, type librairy() to view all loaded packages. A list of packages will appear in a window above the console window.
+3.  At the console prompt, type library() to view all loaded packages. A list of packages will appear in a window above the console window.
+
+```{r}
+library()
+
+sessionInfo()
+loadedNamespaces()
+(.packages())
+```
 
 4. Use the command to list all of the data sets available in these loaded packages.
 
+```{r ls}
+?data
+?datasets
+
+# data()
+```
+
+
 5.  Load the AirPassengers data set into memory.
+
+```{r}
+
+```
+
 
 6.  View the AirPassengers data set. Which years are covered by the data set?
 
+```{r}
+```
+
+
 7.  Load some other of the available data sets into memory and view them. e.g. data(BJsales)
+
+```{r}
+
+```
 
 8.  When you have loaded a number of data sets into memory, list all loaded data sets.
 
 9.  Remove the AirPassengers  data set from memory and confirm that it has been removed.
 
+```{r}
+
+```
+
+
 10. Remove all loaded data sets from memory.
+
+```{r}
+# data("AirPassengers")
+ls()
+rm(list = ls())
+```
+
 
 11. View data sets available in the rpart package.
 
@@ -61,7 +102,7 @@ execute each command as you move through the steps.
 
 ### Major Step 3: Loading data from MongoDB
 
-17.  Install MongoDB. To start the MongoDB server, double-click the mongodb server icon on your desktop.
+17.  Install (`MongoDB` archived in CRAN) -> `mongolite`. To start the MongoDB server, double-click the mongodb server icon on your desktop.
 
 18.  To start the MongoDB client, double-click the mongodb client icon on your
 desktop.
@@ -72,39 +113,18 @@ You will see the command prompt appear and connect to the database test. is the 
 20.  Create and insert three documents into the database rainforest
 using the following commands.
 
-lesmiserables = {_id :1,
-
-Title : "Les Miserables",
-
-Director : "Tom Hooper",
-
-RunTime : 158}
-
+lesmiserables = {_id :1, Title : "Les Miserables", Director : "Tom Hooper", RunTime : 158}
 db.video_recordings.insert(lesmiserables)
 
-skyfall ={_id :2
-
-      Title : "Skyfall",
-
-      Director : "Sam Mendes",
-
-      RunTime : 137}
-
+skyfall ={_id :2, Title : "Skyfall", Director : "Sam Mendes", RunTime : 137}
 db.video_recordings.insert(skyfall)
 
- 
-
-thetallman ={_id :3
-
-      Title : "The Tall Man",
-
-      Director : "Raoul Walsh",
-
-      RunTime : 117}
-
+thetallman ={_id :3, Title : "The Tall Man", Director : "Raoul Walsh", RunTime : 117}
 db.video_recordings.insert(thetallman)
 
+
 View you inserted documents:
+
 22. Find the recording that has a runtime of 137 minutes:
 23.  Return to RStudio.
 24.  Load the RMongo package into R:

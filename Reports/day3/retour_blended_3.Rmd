@@ -94,9 +94,17 @@ points(km_iris$centers[,1:2], col = "blue")
 Perform a classification algorithm (with Decision Tree, see `?rpart`) on the `iris` dataset and plot the results with the cluster labels. Compare those cluster with the iris species.
 
 ```{r classification}
+p_load(rpart, rpart.plot)
 iris
+# ?rpart
 
-?rpart
+# y ~ x + z +t 
+tree <- rpart(Species ~ Sepal.Length + Sepal.Width, data = iris)
+tree
+plot(tree)
+text(tree, use.n = TRUE)
+
+rpart.plot(tree)
 ```
 
 
