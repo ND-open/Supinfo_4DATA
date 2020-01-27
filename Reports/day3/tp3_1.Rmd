@@ -45,35 +45,45 @@ loadedNamespaces()
 ?data
 ?datasets
 
-# data()
+library(help = "datasets")
+data()
 ```
 
 
 5.  Load the AirPassengers data set into memory.
 
 ```{r}
-
+data("AirPassengers")
+# datasets::AirPassengers
 ```
 
 
 6.  View the AirPassengers data set. Which years are covered by the data set?
 
 ```{r}
+AirPassengers
+# plot(AirPassengers)
 ```
 
 
 7.  Load some other of the available data sets into memory and view them. e.g. data(BJsales)
 
 ```{r}
-
+data("BJsales")
 ```
 
 8.  When you have loaded a number of data sets into memory, list all loaded data sets.
 
+```{r}
+ls()
+```
+
+
 9.  Remove the AirPassengers  data set from memory and confirm that it has been removed.
 
 ```{r}
-
+# ?rm
+rm(AirPassengers)
 ```
 
 
@@ -81,23 +91,55 @@ loadedNamespaces()
 
 ```{r}
 # data("AirPassengers")
-ls()
+# ?ls
 rm(list = ls())
 ```
 
 
 11. View data sets available in the rpart package.
 
+```{r}
+?data
+data(package= 'rpart')
+```
+
 
 ### Major Step 2: Loading an external file into R
 
 12. View the current working directory in R.
 
+```{r}
+# ?getwd()
+getwd() # 
+# setwd(dir = ...)
+```
+
 13. Load .csv file into memory in R, specifying appropriate parameters.
+
+```{r load csv}
+dfr <- read.csv2("../../data-raw/tp1_2.csv")
+# read.delim()
+```
+
 
 14. View the loaded data in a data viewer. When you have finished, remove the data from memory.
 
+```{r}
+View(dfr)
+rm(dfr)
+```
+
+
 16. Give column headings to the first few columns.
+
+```{r}
+dfr <- read.csv2("../../data-raw/tp1_2.csv", header = TRUE)
+
+# change variables name
+names(dfr) <- c("Individual", "Score_pct")
+dfr
+rm(dfr)
+```
 
 
 ### Major Step 3: Loading data from MongoDB
@@ -109,6 +151,9 @@ desktop.
 You will see the command prompt appear and connect to the database test. is the name of the default database.
 
 19.  Create a database named Rainforest
+
+> show dbs
+> use Rainforest
 
 20.  Create and insert three documents into the database rainforest
 using the following commands.
@@ -122,25 +167,104 @@ db.video_recordings.insert(skyfall)
 thetallman ={_id :3, Title : "The Tall Man", Director : "Raoul Walsh", RunTime : 117}
 db.video_recordings.insert(thetallman)
 
-
 View you inserted documents:
-
 22. Find the recording that has a runtime of 137 minutes:
+> show dbs
+> db.video_recordings.find()
+
 23.  Return to RStudio.
 24.  Load the RMongo package into R:
 
-25. View RMongo help:
+# ref : https://jeroen.github.io/mongolite/query-data.html
+
+```{r mongodb init, message=FALSE, warning=FALSE}
+pacman::p_load("mongolite")
+```
+
+Using the example and the default local connection `localhost:2717` : 
+
+```{r mongodb example}
+dmd <- mongo("diamonds")
+dmd$insert(ggplot2::diamonds)
+
+alldata <- dmd$find('{}')
+print(alldata)
+
+premium_diamonds <- dmd$find('{"cut" : "Premium", "price" : { "$lt" : 1000 } }')
+print(premium_diamonds)
+
+dmd$disconnect()
+```
+
+```{r mongo success !}
+m <- mongo(collection = "video_recordings", db = "Rainforest", url = "mongodb://localhost")
+str(m)
+m$info()
+m$find('{}')
+```
+
+
+25. View `mongolite` help:
 
 26. Connect to the database:
+
 27. Query the collections in the MongoDB database:
+
 28. Query which recordings have a runtime of 137 minutes:
+
+```{r}
+m$find('{"RunTime": 137}')
+```
+
+
 29. Close the connection:
+
+```{r close MongoDB}
+m$disconnect()
+```
+
+
 
 ### Major Step 4: Loading a web page into R (webscraping)
 
-
 30.  Load a web page into R and view it (data science from wikipedia)
-31. View the loaded data
+
+```{r Scraping}
+pacman::p_load(rvest)
+```
+
+Scrap Imdb data :
+
+```{r}
+gf_url <- 'https://www.imdb.com/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=N149CP8RJ7SRWMTGZ4N9&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_2'
+
+gf_movie <- read_html(gf_url)
+```
+
+
+```{r}
+rating <- gf_movie %>% 
+  html_nodes("strong span") %>%
+  html_text() %>%
+  as.numeric()
+rating
+```
+
+
+```{r}
+cast <- gf_movie %>%
+        html_nodes(xpath = '//*[@id="titleCast"]/table') %>%
+        html_table()
+cast
+```
+
+
+```{r}
+poster <- gf_movie %>%
+  html_nodes(".poster img") %>%
+  html_attr("src")
+poster
+```
 
 32. Load an HTML table from a website into R (http://en.wikipedia.org/wiki/List_of_countries_by_population
 33. View the loaded data (the 1st element):
