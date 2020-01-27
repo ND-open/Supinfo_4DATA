@@ -1,0 +1,211 @@
+---
+title: "TP3 Exercise 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 2: Descriptive statistics with R software and Python
+
+Introduction: The purpose of this exercise is to make you assimilate the numerical and graphic representations of univariate and bivariate descriptive statistics.
+
+
+Objective of the exercise :
+
+• Manipulate the data.
+• Make graphics.
+ 
+
+### Exercise 2.1 Univariate descriptive statistics
+
+R software is a set of function libraries called packages. Each library contains datasets. To find out for example the datasets contained in the base package, write the following instruction:
+> data (package = "base").
+The result appears in an R data sets window.
+
+ 
+
+Among the data sets present, there is iris which is a famous data set. They were collected by Edgar Anderson. The file gives the measurements in centimeters of the following variables:
+(i) length of the sepal (Sepal.Length),
+(ii) width of the sepal (Sepal.Width),
+(iii) length of the petal (Petal.Length) and
+(iv) width of the petal (Petal.Width)
+ 
+
+for three species of iris:
+
+
+(i) Iris setosa,
+(ii) Iris versicolor
+
+(iii) Iris virginica.
+
+
+Sir R.A. Fisher used this data to construct linear combinations of the variables to best separate the three species of iris.
+
+
+To analyze the iris file, it must be loaded. What is the instruction to type to load this file?
+
+Type one by one each of the instructions below and note the result obtained if possible. Please note, the R software is case-sensitive.
+ 
+
+> iris
+> dim (iris)
+> names (iris)
+What difference (s) do you make with the command
+
+> str (iris)?
+
+
+Type the following commands:
+
+
+> iris$Petal.Length
+> iris$Species
+
+
+What do you observe?
+
+ 
+
+The last column of the iris file contains the names of the species divided into three categories: setosa, versicolor and virginica. To access it, use the iris $ Species instruction, as you saw in the previous question. We then say that the last column contains a qualitative variable with three modalities called L levels by the software. The L levels function applied to the iris$Species column gives the modalities of the variable. Indeed, just type:
+
+> levels(iris$Species)
+
+
+To summarize the information contained in this variable, we use the instruction:
+> summary(iris$Species)
+
+
+What is the result displayed?
+
+
+This information can be obtained by constructing a table (table) counting the number of individuals by category. To do this, type the following instruction:
+> table(iris$Species)
+ 
+
+Compare with the result obtained in the previous question.
+
+
+The R software allows graphics to be produced. When a graphical instruction is launched, a new L device window is opened. The graphical representations linked to the qualitative variables are the representation in sectors or pie chart (pie) and the representation in bars (barplot). Type the following command lines:
+
+> pie(table(iris$Species))
+> barplot(table(iris$Species))
+
+
+There is a parameter allowing to split the graphic window:
+par(mfrow = c (nl, nc)) or par(mfcol = c (nl, nc)).
+nl defines the number of line graphs and nc defines the number of column graphs.
+mfrow means that the order of entry of the graphics is done according to the lines and mfcol means that the order of entry of the graphics is done according to the columns.
+Suppose we wanted to represent six graphs in a window in two lines and three columns. The first instruction leads to entering the graphics in order:
+ 
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+The second instruction leads to entering the graphics in order:
+
+1
+
+3
+
+5
+
+2
+
+4
+
+6
+
+Two botanists also took an interest in irises and collected the following species:
+
+> collection1<-rep(c("setosa","versicolor","virginica"), +c(15,19,12))
+
+> collection2<-rep(c("setosa","versicolor","virginica"),
+
++c(22,27,17))
+
+Using the function par(mfrow = c (2,2)),
+1. Build the pie charts linked to these two new distributions. Comment.
+2. Construct the stick representations of these two new distributions. Comment.
+3. Discuss the advantages and disadvantages of these two types of representations.
+
+
+The third column of the iris file contains the length of the petal. It is a measured variable then qualified as a quantitative variable. To summarize the information contained in this variable, we use the summary function.
+
+>summary(iris$Petal.Length)
+
+
+What result do you get?
+Min.    1stQu.             Median           Mean 3          3rdQu.              Max.
+1,000 1,600              4,350              3,758              5,100              6,900
+
+
+The smallest (Min.) Petal length is equal to 1.000cm while the largest (Max.) Is equal to 6.900cm. The mean is equal to 3.758cm. If all 150 petal lengths are listed in ascending order, 1stQu., Median and 3rdQu. are the three values that cut the distribution into four equal parts. We recall that we respectively call them first quartile, median (or second quartile) and third quartile.
+Let's try to find these six parameter values.
+
+> min(iris$Petal.Length)
+
+> max(iris$Petal.Length)
+
+> mean(iris$Petal.Length)
+
+ 
+
+To calculate the average we could have done otherwise. Type the following command lines:
+
+> sum(iris$Petal.Length)
+
+> length(iris$Petal.Length)
+
+> sum(iris$Petal.Length)/length(iris$Petal.Length)
+
+ 
+
+Are you getting the same result as before?
+Now let's take care of finding the values of the three quartiles.
+
+ 
+
+> sort(iris$Petal.Length)
+
+ 
+
+What is going on?
+Then continue by typing the following command lines:
+
+> ordLpetal <- sort(iris$Petal.Length)
+
+> ordLpetal # comment the result
+
+> sum(ordLpetal)/length(ordLpetal)
+
+> ordLpetal[38]
+
+> (ordLpetal[75]+ordLpetal[76])/2
+
+> ordLpetal[113]
+
+ 
+
+One suitable representation is the histogram (hist).
+
+> hist(iris$Petal.Length,col=gray(0.6), main = "Histogram")
+main is the option to display a title in a chart.
+
+
+Perform the same type of analysis on each of the other three quantitative variables: width of the petal, length of the sepal and width of the sepal. Note that you do not have all of the instructions to rewrite using the keyboard arrow system. ↑ and ↓ allow you to find the functions you used.
+ 
+
+### Exercise 2.2 Resume the exercise with Python
+

@@ -1,0 +1,49 @@
+---
+title: "TP3 Exercise 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 3 : Classification
+
+We are working on the “Spam” database which contains 4601 emails, which have been manually classified as Spam or Non-Spam. This database also contains 57 characteristics for each email (frequency of the words "money", "free", "credit", etc.). The objective is to develop an automatic classification algorithm, which, from the 57 characteristics, can decide whether a new mail should be classified as Spam or as Non-Spam.
+
+The database can be downloaded here
+
+https://archive.ics.uci.edu/ml/datasets/spambase (Links to an external site.)
+
+1 - Download and save the files in your working directory.
+2 - To import it into RStudio,
+
+spambase<-read.csv("spambase.data")names(spambase)<-c(read.table("spambase.names", skip=33, sep=":", stringsAsFactors= FALSE)[[1]], "spam")
+
+3 - Display the first lines of the database
+
+head(spambase)
+
+4 - Represent the database graphically, for example with a graph of this type:
+
+library(ggplot2)ggplot(spambase, aes(x = charfreqdollar, y = wordfreqhp)) +geompoint(aes(colour=spam, shape=spam), size = 3) +xlab("frequence of dollar") +ylab("frequence of hp") +ggtitle("Spam vs frequences of free and hp")
+
+5 - We will apply a logistic regression to predict the probability that an email is spam. The algorithm used to calculate the coefficients of the logistic model is programmed in the function
+
+Glm with R.
+
+We enter the variable to be explained (spam) as a function of explanatory variables.
+(a) With two explanatory variables, the syntax is:
+
+ res<-glm(as.factor(spam) wordfreqmake+wordfreqaddress,data=spambase, family="binomial")summary(res)
+
+(b) When using the set of variables to predict the variable to be explained, the syntax is:
+
+resC<-glm(as.factor(spam) .,data=spambase, family="binomial")summary(resC)
+
+(c) We then apply an automatic variable selection method to keep only those that are relevant:
+
+final<-step(resC)summary(final)
+
+The selected variables can be interpreted by the expert.
+

@@ -1,0 +1,128 @@
+---
+title: "TP3 - Data Mining"
+output: 
+  html_document:
+          toc: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Exercise 1 : R
+
+
+In this exercise, you will explore the different types of data that can be loaded into
+R for processing.
+
+__Overview__
+
+R has tremendous flexibility in reading data. This exercise will allow you to load internal
+data sets, files, web pages (webscraping) and XML. We will also load data from a
+nonrelational (NoSQL) data source.
+
+
+### Major Step 1: Reviewing the first data set
+
+1.  Install  RStudio
+2.  Double-click RStudio on the desktop. In RStudio, cerate and open the file  Exo1. Add
+commands to the file according to the instructions that follow in this exercise, and
+execute each command as you move through the steps.
+3.  At the console prompt, type librairy() to view all loaded packages. A list of packages will appear in a window above the console window.
+
+4. Use the command to list all of the data sets available in these loaded packages.
+
+5.  Load the AirPassengers data set into memory.
+
+6.  View the AirPassengers data set. Which years are covered by the data set?
+
+7.  Load some other of the available data sets into memory and view them. e.g. data(BJsales)
+
+8.  When you have loaded a number of data sets into memory, list all loaded data sets.
+
+9.  Remove the AirPassengers  data set from memory and confirm that it has been removed.
+
+10. Remove all loaded data sets from memory.
+
+11. View data sets available in the rpart package.
+
+
+### Major Step 2: Loading an external file into R
+
+12. View the current working directory in R.
+
+13. Load .csv file into memory in R, specifying appropriate parameters.
+
+14. View the loaded data in a data viewer. When you have finished, remove the data from memory.
+
+16. Give column headings to the first few columns.
+
+
+### Major Step 3: Loading data from MongoDB
+
+17.  Install MongoDB. To start the MongoDB server, double-click the mongodb server icon on your desktop.
+
+18.  To start the MongoDB client, double-click the mongodb client icon on your
+desktop.
+You will see the command prompt appear and connect to the database test. is the name of the default database.
+
+19.  Create a database named Rainforest
+
+20.  Create and insert three documents into the database rainforest
+using the following commands.
+
+lesmiserables = {_id :1,
+
+Title : "Les Miserables",
+
+Director : "Tom Hooper",
+
+RunTime : 158}
+
+db.video_recordings.insert(lesmiserables)
+
+skyfall ={_id :2
+
+      Title : "Skyfall",
+
+      Director : "Sam Mendes",
+
+      RunTime : 137}
+
+db.video_recordings.insert(skyfall)
+
+ 
+
+thetallman ={_id :3
+
+      Title : "The Tall Man",
+
+      Director : "Raoul Walsh",
+
+      RunTime : 117}
+
+db.video_recordings.insert(thetallman)
+
+View you inserted documents:
+22. Find the recording that has a runtime of 137 minutes:
+23.  Return to RStudio.
+24.  Load the RMongo package into R:
+
+25. View RMongo help:
+
+26. Connect to the database:
+27. Query the collections in the MongoDB database:
+28. Query which recordings have a runtime of 137 minutes:
+29. Close the connection:
+
+### Major Step 4: Loading a web page into R (webscraping)
+
+
+30.  Load a web page into R and view it (data science from wikipedia)
+31. View the loaded data
+
+32. Load an HTML table from a website into R (http://en.wikipedia.org/wiki/List_of_countries_by_population
+33. View the loaded data (the 1st element):
+
+
