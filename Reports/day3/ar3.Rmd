@@ -1,0 +1,45 @@
+---
+title: "Activité Rapide 3"
+date: "26/01/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Quantitative variable analysis [Pen & paper]
+
+The `HairEyeColor` is a R base dataset containing the "Distribution of hair and eye color and sex in 592 statistics students" :
+
+```{r, results='asis', warning=FALSE, message=FALSE}
+library(dplyr)
+dfr <- tibble::as_tibble( HairEyeColor )
+dfr2 <- dfr %>% 
+        split(f = dfr$Sex)
+        # tidyr::pivot_wider(data = ., id_cols = c("Hair", "Eye"), names_from = "Sex", values_from = "n")
+
+women <- dfr2$Female %>% 
+        select(-Sex) %>% 
+        tidyr::pivot_wider(., id_cols = c("Hair"), names_from = "Eye", names_prefix = "Eye_", values_from = "n")
+
+men <- dfr2$Male %>% 
+        select(-Sex) %>% 
+        tidyr::pivot_wider(., id_cols = c("Hair"), names_from = "Eye",  names_prefix = "Eye_", values_from = "n")
+
+pander::pander(women)
+pander::pander(men)
+
+# sum(women[,-1])
+# sum(men[,-1])
+
+```
+
+1) What is the proportion of student that have brown eye and hair ?
+
+2) Given a female student, what is the chance that she has green eye and red hair ?
+
+3) Given a male student, what is most likely to be his hair color ?
+
+4) Given a student that has hazel eye and red hair, is this student more likely to be a woman or a man ?
+

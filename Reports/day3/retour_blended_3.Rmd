@@ -1,0 +1,160 @@
+---
+title: "Retour Blended 3"
+date: "26/01/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r library step}
+if(!require("pacman")){install.packages("pacman")}
+```
+
+
+```{r data step}
+iris <- tibble::as_tibble(iris)
+```
+
+
+### Context
+
+The `iris` dataset.
+
+
+### 1) Data Reduction
+
+Perform dimensionnality reduction (with a PCA) on the `iris_num` dataset and plot the 2 first dimensions of projection with the labels.
+
+```{r PCA}
+iris_num <- iris[,-5]
+labels <- iris[,5]
+iris_num
+labels
+```
+
+### 2) Clustering
+
+Perform a cluster analysis (with a kmeans) on the `iris_num` dataset and plot the results with the cluster labels. Compare those cluster with the iris species.
+
+```{r clustering}
+iris_num
+```
+
+
+### 3) Classification
+
+Perform a classification algorithm (with Decision Tree, see `?rpart`) on the `iris` dataset and plot the results with the cluster labels. Compare those cluster with the iris species.
+
+```{r classification}
+iris
+```
+
+
+### 4) Association Analysis
+
+```{r, message=FALSE, warning=FALSE}
+pacman::p_load(arules, arulesViz)
+data("Groceries", package = "arules")
+
+?Groceries
+str(Groceries)
+summary(Groceries)
+```
+
+```{r scatter plot of association relation}
+rules <- apriori(Groceries,
+           parameter = list(supp = 0.001, conf = 0.75))
+# summary(rules)
+inspect(rules[1:10,])
+plot(rules)
+```
+
+```{r graph association graph}
+# Graph of top 20 rules
+plot(rules[1:20,], 
+  method = "graph", 
+  control = list(type = "items"))
+```
+
+
+```{r parallel coordinate association plot}
+# Parallel coordinates plot of top 20 rules
+plot(rules[1:20], 
+  method = "paracoord", 
+  control = list(reorder = TRUE))
+```
+
+
+```{r matrix association plot}
+# Matrix plot of antecedents and consequents
+plot(rules[1:20], 
+     method = "matrix", 
+     control = list(reorder = TRUE))
+```
+
+
+```{r grouped association plot}
+# Grouped matrix plot of antecedents and consequents
+plot(rules[1:20], method = "grouped")
+```
+
+
+### 5) Regression Analysis
+
+Using the iris dataset `iris_train` dataset, build a regression model (a simple linear model with `stats::lm()`) to predict the length of the iris sepals (variable `Sepal.Length`) :
+
+```{r create the train set}
+set.seed(456)
+train_index <- sample(1:150, 120)
+iris_train <- iris[ train_index , ]
+table(iris_train$Species)
+iris_x_test <- iris[-train_index , -1]
+iris_y_test <- iris[-train_index , 1]
+```
+
+```{r train the model}
+iris_train
+```
+
+Test you model on the test set `iris_x_test` and compare your results using `iris_y_test`. How good is your model ?
+
+```{r test the model}
+iris_x_test
+iris_y_test
+```
+
+
+### 6) Sequential Patterns
+
+Adapt the following code to compare several modelisation of seqential pattern mining (1 or 2 states) :
+
+```{r HMM data}
+pacman::p_load(pacman, depmixS4)
+data(speed)
+str(speed)
+?depmixS4::speed
+```
+
+
+```{r HMM data plot}
+plot(ts(speed[, 1:3]), main = "speed data")
+```
+
+
+```{r HMM model}
+model1 <- depmix(list(rt ~ 1, corr ~ 1), 
+            data = speed, 
+            nstates = 1,
+            family = list(gaussian(), 
+              multinomial("identity")))
+fm1 <- fit(model1, verbose = FALSE)
+```
+
+
+### 7) Text Mining
+
+cf video
+
