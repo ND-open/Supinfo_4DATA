@@ -66,8 +66,26 @@ Perform a cluster analysis (with a kmeans) on the `iris_num` dataset and plot th
 
 ```{r clustering}
 iris_num
-
 ?kmeans
+
+km_iris <- kmeans(x = iris_num, centers = 10, iter.max = 100)
+km_iris
+```
+
+Decide number of groups :
+
+```{r}
+plot(1:10, cumsum(km_iris$withinss)/sum(km_iris$withinss), type ="b")
+```
+
+With 3 groups
+
+```{r}
+km_iris <- kmeans(x = iris_num, centers = 3, iter.max = 100)
+km_iris
+
+plot(iris[, 1:2], col = km_iris$cluster)
+points(km_iris$centers[,1:2], col = "blue")
 ```
 
 
@@ -77,6 +95,8 @@ Perform a classification algorithm (with Decision Tree, see `?rpart`) on the `ir
 
 ```{r classification}
 iris
+
+?rpart
 ```
 
 
