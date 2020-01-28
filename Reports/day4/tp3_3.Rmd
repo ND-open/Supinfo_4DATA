@@ -28,16 +28,49 @@ spambase <- read.csv(here::here("data-raw", "spambase.data") )
 names(spambase) <- c(read.delim(here::here("data-raw", "spambase.names"), 
            header = FALSE, sep = ":", skip = 33,
            stringsAsFactors = FALSE)$V1, "spam")
+
+names(spambase)
 ```
 
 
 3 - Display the first lines of the database
 
-head(spambase)
+```{r head of data}
+spambase %>% 
+        # select(`char_freq_#`) %>% 
+        head(6)
+```
+
+```{r data glimpse}
+spambase %>%  
+        glimpse()
+```
+
 
 4 - Represent the database graphically, for example with a graph of this type:
 
-library(ggplot2)ggplot(spambase, aes(x = charfreqdollar, y = wordfreqhp)) +geompoint(aes(colour=spam, shape=spam), size = 3) +xlab("frequence of dollar") +ylab("frequence of hp") +ggtitle("Spam vs frequences of free and hp")
+```{r ggplot}
+# library(ggplot2)
+spambase %>% names()
+
+spambase %>% 
+        mutate(spam = factor(spam)) %>% 
+        ggplot(aes(x = `char_freq_$` , y = word_freq_hp, colour = spam)) +
+        geom_point(alpha = .5) +
+        # geom_bar
+        labs(title = "Spam vs frequences of free and hp",
+             subtitle = "From the UCLI dataset",
+             x = "Frequence of dollar",
+             y = "Frequence of hp",
+             caption = "Spam detection 4Data"
+        ) +
+        theme_light()
+# theme_dark()
+        # xlab("Frequence of dollar") + 
+        # ylab("Frequence of hp") +
+        # ggtitle("Spam vs frequences of free and hp")
+```
+
 
 5 - We will apply a logistic regression to predict the probability that an email is spam. The algorithm used to calculate the coefficients of the logistic model is programmed in the function
 
@@ -45,6 +78,15 @@ Glm with R.
 
 We enter the variable to be explained (spam) as a function of explanatory variables.
 (a) With two explanatory variables, the syntax is:
+
+```{r}
+spam_clean <- spambase %>% 
+        mutate(spam = factor(spam))
+```
+
+```{r}
+?glm
+```
 
  res<-glm(as.factor(spam) wordfreqmake+wordfreqaddress,data=spambase, family="binomial")summary(res)
 
