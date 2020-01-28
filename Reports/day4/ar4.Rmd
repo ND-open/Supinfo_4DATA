@@ -12,14 +12,73 @@ knitr::opts_chunk$set(echo = TRUE)
 
 1) Find what is the working directory
 
+```{r}
+getwd()
+```
+
+
 2) Load the list of available packages and datasets
+
+```{r}
+loadedNamespaces()
+(.packages())
+```
+
+```{r}
+data()
+# help("datasets")
+library(help = "datasets")
+```
+
 
 3) Load the `Titanic` dataset
 
+```{r}
+Titanic # ! don't load dataset in memory
+data(Titanic)
+# rm(Titanic)
+```
+
+
 4) Represents (with a table and a plot) the chances of survival of the passengers :
 
+```{r}
+str(Titanic)
+df_titanic <- as.data.frame(Titanic)
+str(df_titanic)
+```
+
   * per Age
+
+```{r}
+df_titanic$Age
+
+nb_adult <- sum(df_titanic$Freq[df_titanic$Age == "Adult"])
+nb_children <- sum(df_titanic$Freq[df_titanic$Age == "Child"])
+```
+  
+```{r}
+age_fct <- factor(rep(c("Adult", "Child"), c(nb_adult, nb_children)) ) 
+# barplot(c(nb_adult, nb_children), xlab = c("Categories"))
+barplot(table(age_fct) )
+```
+
+
+```{r}
+library(ggplot2)
+ggplot(data.frame("Age" = age_fct), aes(x=Age)) + 
+        geom_bar()
+        # geom_label(aes(y = c(2050, 100), label = c("2050", "100")))
+```
+
+ 
   * per Sex
+  
+```{r}
+table(df_titanic$Sex)
+```
+  
+  
   * per Age and Sex
   * per Class
 
