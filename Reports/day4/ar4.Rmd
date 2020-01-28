@@ -1,0 +1,25 @@
+---
+title: "Activité Rapide 4"
+date: "26/01/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### R coding
+
+1) Find what is the working directory
+
+2) Load the list of available packages and datasets
+
+3) Load the `Titanic` dataset
+
+4) Represents (with a table and a plot) the chances of survival of the passengers :
+
+  * per Age
+  * per Sex
+  * per Age and Sex
+  * per Class
+
