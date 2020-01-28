@@ -18,7 +18,18 @@ https://archive.ics.uci.edu/ml/datasets/spambase (Links to an external site.)
 1 - Download and save the files in your working directory.
 2 - To import it into RStudio,
 
-spambase<-read.csv("spambase.data")names(spambase)<-c(read.table("spambase.names", skip=33, sep=":", stringsAsFactors= FALSE)[[1]], "spam")
+```{r data load}
+library(pacman)
+p_load(here)
+p_load(tidyverse)
+
+spambase <- read.csv(here::here("data-raw", "spambase.data") )
+
+names(spambase) <- c(read.delim(here::here("data-raw", "spambase.names"), 
+           header = FALSE, sep = ":", skip = 33,
+           stringsAsFactors = FALSE)$V1, "spam")
+```
+
 
 3 - Display the first lines of the database
 
